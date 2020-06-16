@@ -13,6 +13,9 @@ defmodule JfoodWeb.Api.CategoryView do
 
   def render("product.json", %{product: product}) do
     %{
+      image: product.image,
+      sku: product.sku,
+      pack_size: product.pack_size,
       name: product.name,
       price: Decimal.to_float(product.price),
       is_seasonal: product.is_seasonal,

@@ -40,6 +40,7 @@ defmodule JfoodWeb.Endpoint do
     cookie_key: "request_logger"
 
   plug Plug.RequestId
+  plug Plug.Logger
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
   plug Plug.Parsers,

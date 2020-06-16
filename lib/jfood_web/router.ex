@@ -7,6 +7,8 @@ defmodule JfoodWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug JfoodWeb.Plugs.LoadCustomer
+
   end
 
   pipeline :api do
@@ -18,6 +20,8 @@ defmodule JfoodWeb.Router do
 
     get "/", PageController, :index
     get "/categories/:name", CategoryController, :show
+    get "/register", RegistrationController, :new
+    post "/register", RegistrationController, :create
 
   end
 

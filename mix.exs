@@ -49,6 +49,19 @@ defmodule Jfood.MixProject do
       {:nimble_csv, "~> 0.1.0"},
       {:decimal, "~> 1.6"},
       {:db_connection, "~> 2.0"},
+      {:comeonin, "~> 5.3"},
+      {:oauth2, "~> 2.0", override: true},
+      {:ueberauth, "~> 0.6"},
+      {:ueberauth_identity, "~> 0.2.3"},
+      {:ueberauth_facebook, "~> 0.8"},
+      {:ueberauth_github, "~> 0.7"},
+      {:ueberauth_google, "~> 0.8"},
+      {:ueberauth_slack, "~> 0.4"},
+      {:ueberauth_twitter, "~> 0.3.0"},
+      {:guardian, "~> 2.1.1"},
+      # {:bcrypt_elixir, "~> 2.0"},
+      # requried for Oauth2
+      poison: "~> 3.1"
     ]
   end
 
