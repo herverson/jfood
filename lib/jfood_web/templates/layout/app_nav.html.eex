@@ -2,6 +2,9 @@
 <%# <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %>
   <li><%= link "Fruits", to: Routes.category_path(@conn, :show, "fruits") %></li>
   <li><%= link "Vegetables", to: Routes.category_path(@conn, :show, "vegetables") %></li>
+  <ul class="nav navbar-nav navbar-right">
+  <li><%= link cart_link_text(@conn), to: Routes.cart_path(@conn, :show), class: "cart nav-link" %></li>
+</ul>
 
 <%= if @customer do %>
   <li class="dropdown">

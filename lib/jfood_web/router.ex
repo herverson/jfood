@@ -8,6 +8,7 @@ defmodule JfoodWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug JfoodWeb.Plugs.LoadCustomer
+    plug JfoodWeb.Plugs.FetchCart
 
   end
 
@@ -25,6 +26,9 @@ defmodule JfoodWeb.Router do
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
+    post "/cart", CartController, :add
+    get "/cart", CartController, :show
+    put "/cart", CartController, :update
 
   end
 

@@ -1,0 +1,43 @@
+<h1>Carrinho</h1>
+<%= if Enum.empty?(@cart.line_items) do %>
+  <p>Seu carrinho está vazio!</p>
+<% else %>
+  <%= form_for @cart_changeset, "/cart", fn f -> %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome do produto</th>
+          <th>Tamanho da embalagem</th>
+          <th>Quantidade</th>
+          <th>Preço unitário</th>
+          <th>Subtotal</th>
+          <td>Remover?</td>
+        </tr>
+      </thead>
+      <tbody>
+      <%= inputs_for f, :line_items, fn lf -> %>
+        <tr>
+          <td><%= lf.data.product_name %></td>
+          <td><%= lf.data.pack_size %></td>
+          <td>
+            <%= hidden_input lf, :product_id %>
+            <%= number_input lf, :quantity %>
+            <%= error_tag lf, :quantity %>
+          </td>
+          <td>R$ <%= lf.data.unit_price %></td>
+          <td>R$ <%= lf.data.total %></td>
+          <td><%= checkbox lf, :delete %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan=4>Total</td>
+        <td>R$ <%= @cart.total %></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="form-group">
+      <%= submit "Alterar carrinho!", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>

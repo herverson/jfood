@@ -1,7 +1,7 @@
 defmodule Jfood.CRM.Customer do
   use Ecto.Schema
   import Ecto.Changeset
-  import Comeonin.Bcrypt, only: [hashpwsalt: 1]
+  # import Comeonin.Bcrypt, only: [hashpwsalt: 1]
   alias Jfood.CRM.Customer
 
   schema "customers" do
@@ -26,13 +26,13 @@ defmodule Jfood.CRM.Customer do
     # |> put_hashed_password
   end
 
-  defp put_hashed_password(changeset) do
-    case changeset.valid? do
-      true ->
-        changes = changeset.changes
-        put_change(changeset, :password_hash, hashpwsalt(changes.password))
-      _ ->
-        changeset
-    end
-  end
+  # defp put_hashed_password(changeset) do
+  #   case changeset.valid? do
+  #     true ->
+  #       changes = changeset.changes
+  #       put_change(changeset, :password_hash, hashpwsalt(changes.password))
+  #     _ ->
+  #       changeset
+  #   end
+  # end
 end
