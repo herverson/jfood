@@ -22,6 +22,9 @@ defmodule JfoodWeb.Router do
     get "/categories/:name", CategoryController, :show
     get "/register", RegistrationController, :new
     post "/register", RegistrationController, :create
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    get "/logout", SessionController, :delete
 
   end
 

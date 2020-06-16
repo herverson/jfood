@@ -22,11 +22,7 @@
     <%= error_tag f, :phone %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :residence_area, "Endereço", class: "control-label" %>
-    <%= text_input f, :residence_area, class: "form-control" %>
-    <%= error_tag f, :residence_area %>
-  </div>
+  <%= select f, :residence_area, @residence_areas, prompt: "Escolha se endereço", class: "form-control" %>
 
   <div class="form-group">
     <%= label f, :password, "Senha", class: "control-label" %>
