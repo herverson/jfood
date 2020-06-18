@@ -11,11 +11,13 @@ defmodule JfoodApiWeb.ProductView do
   end
 
   def render("product.json", %{product: product}) do
-    %{id: product.id,
+    %{
+      id: product.id,
       name: product.name,
       quantity: product.quantity,
-      price: product.price,
+      price: Decimal.to_float(product.price),
       imageUrl: product.imageUrl,
-      description: product.description}
+      description: product.description
+    }
   end
 end

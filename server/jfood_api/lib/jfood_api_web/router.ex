@@ -3,11 +3,29 @@ defmodule JfoodApiWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug JfoodApiWeb.ApiAuthPlug, otp_app: :jfood_api
+  end
+
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: JfoodApiWeb.ApiAuthErrorHandler
   end
 
   scope "/api", JfoodApiWeb do
     pipe_through :api
-    resources "/products", ProductController, except: [:new, :edit]
+
+    resources "/registration", RegistrationController, singleton: true, only: [:create]
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
+  end
+
+  scope "/api", JfoodApiWeb do
+    pipe_through :api
+    resources "/products", ProductController, only: [:show, :index]
+  end
+
+  scope "/api", JfoodApiWeb do
+    pipe_through [:api, :api_protected]
+    resources "/products", ProductController, except: [:new, :edit, :show, :index]
   end
 
   # Enables LiveDashboard only for development

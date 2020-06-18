@@ -18,6 +18,11 @@ config :jfood_api, JfoodApiWeb.Endpoint,
   pubsub_server: JfoodApi.PubSub,
   live_view: [signing_salt: "nxt7fFok"]
 
+# Pow configuration
+  config :jfood_api, :pow,
+  user: JfoodApi.Users.User,
+  repo: JfoodApi.Repo
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
