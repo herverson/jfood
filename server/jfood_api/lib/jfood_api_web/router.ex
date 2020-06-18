@@ -21,11 +21,13 @@ defmodule JfoodApiWeb.Router do
   scope "/api", JfoodApiWeb do
     pipe_through :api
     resources "/products", ProductController, only: [:show, :index]
+    resources "/orders", OrderController, only: [:show, :index]
   end
 
   scope "/api", JfoodApiWeb do
     pipe_through [:api, :api_protected]
     resources "/products", ProductController, except: [:new, :edit, :show, :index]
+    resources "/orders", OrderController, except: [:new, :edit, :show, :index]
   end
 
   # Enables LiveDashboard only for development

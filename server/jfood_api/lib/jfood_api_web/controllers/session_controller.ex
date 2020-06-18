@@ -9,7 +9,7 @@ defmodule JfoodApiWeb.SessionController do
     |> Pow.Plug.authenticate_user(user_params)
     |> case do
       {:ok, conn} ->
-        json(conn, %{data: %{token: conn.private[:api_auth_token], renew_token: conn.private[:api_renew_token]}})
+        json(conn, %{data: %{token: conn.private[:api_auth_token], renew_token: conn.private[:api_renew_token], id: conn.assigns.current_user.id}})
 
       {:error, conn} ->
         conn
