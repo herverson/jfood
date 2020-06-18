@@ -36,6 +36,7 @@ defmodule JfoodWeb.Router do
   scope "/api", JfoodWeb.Api, as: :api do
     pipe_through :api
     get "/categories/:name", CategoryController, :show
+    get "/cart", CartController, :show
   end
 
   # Enables LiveDashboard only for development
