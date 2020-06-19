@@ -2,6 +2,7 @@ defmodule JfoodApiWeb.Router do
   use JfoodApiWeb, :router
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     plug JfoodApiWeb.ApiAuthPlug, otp_app: :jfood_api
   end

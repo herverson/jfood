@@ -43,7 +43,10 @@ defmodule JfoodApi.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:pow, "~> 1.0.15"}
+      {:pow, "~> 1.0.15"},
+      {:earmark, "~> 1.2", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev},
+      {:cors_plug, "~> 1.5"},
     ]
   end
 
