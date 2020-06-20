@@ -47,6 +47,8 @@ defmodule JfoodApi.MixProject do
       {:earmark, "~> 1.2", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev},
       {:cors_plug, "~> 1.5"},
+      {:corsica, "~> 1.0"}
+
     ]
   end
 

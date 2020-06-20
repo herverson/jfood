@@ -2,7 +2,6 @@ defmodule JfoodApiWeb.Router do
   use JfoodApiWeb, :router
 
   pipeline :api do
-    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     plug JfoodApiWeb.ApiAuthPlug, otp_app: :jfood_api
   end
@@ -22,13 +21,13 @@ defmodule JfoodApiWeb.Router do
   scope "/api", JfoodApiWeb do
     pipe_through :api
     resources "/products", ProductController, only: [:show, :index]
-    resources "/orders", OrderController, only: [:show, :index]
+    resources "/orders", OrderController
   end
 
   scope "/api", JfoodApiWeb do
     pipe_through [:api, :api_protected]
     resources "/products", ProductController, except: [:new, :edit, :show, :index]
-    resources "/orders", OrderController, except: [:new, :edit, :show, :index]
+    # resources "/orders", OrderController, except: [:new, :edit, :show, :index]
   end
 
   # Enables LiveDashboard only for development

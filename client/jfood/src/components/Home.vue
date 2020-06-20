@@ -74,14 +74,14 @@
       </v-col>
     </v-row>
     <v-col class="md-12">
-      <h5>Pedidos #{{ order.id }}</h5>
+      <h5>Pedidos #{{ Math.floor(Math.random() * 10000) }}</h5>
       <hr/>
-      <div v-if="order.orderItems.length === 0">
+      <div v-if="order.products.length === 0">
         <br/>
         <br/>
-        <h5>Escolha os items do pedido</h5>
+        <h5>Carrinho vazio</h5>
       </div>
-      <v-row v-for="orderItem in order.orderItems" v-bind:key="orderItem.item.id">
+      <v-row v-for="orderItem in order.products" v-bind:key="orderItem.item.id">
         <v-col class="md-1">
           {{ orderItem.quantity }}
         </v-col>
@@ -98,6 +98,7 @@
       <br/>
       <v-btn 
       color="success"
+      @click="saveOrder()"
       >
         Confirmar ({{ formatMoney(order.total) }})
       </v-btn>
@@ -119,8 +120,8 @@ export default {
     messages: 0,
     show: false,
     order: {
-      id: Math.floor(Math.random() * 10000),
-      orderItems: [],
+      status: '??',
+      products: [],
       total: 0
     }
   }),
@@ -146,9 +147,9 @@ export default {
       setTimeout(() => (this.loading = false), 2000)
     },
     addItem(item) {
-			const orderItem = this.order.orderItems.find(orderItem => orderItem.item.id === item.id);
+			const orderItem = this.order.products.find(orderItem => orderItem.item.id === item.id);
 			if (!orderItem) {
-				this.order.orderItems.push({
+				this.order.products.push({
 					quantity: 1,
 					item
 				});
@@ -157,19 +158,28 @@ export default {
 			}
       this.order.total += item.price;
       this.addCart(1);
-      console.log(this.order);
 		},
 		deleteItem(item) {
-			const orderItem = this.order.orderItems.find(orderItem => orderItem.item.id === item.id);
+			const orderItem = this.order.products.find(orderItem => orderItem.item.id === item.id);
 			if (!orderItem) return;
 			if (orderItem.quantity === 1) {
-				this.order.orderItems.splice(this.order.orderItems.indexOf(orderItem), 1);
+				this.order.products.splice(this.order.products.indexOf(orderItem), 1);
 			} else {
 				orderItem.quantity--;
 			}
       this.order.total -= item.price;
       this.addCart(-1);
-		}
+    },
+    saveOrder() {
+      console.log(this.order);
+      this.order.user_id = 1
+      const order = {
+        order: this.order
+      }
+      axios.post('http://localhost:4000/api/orders', order).then(() => {
+      
+    });
+    }
   },
 }
 </script>

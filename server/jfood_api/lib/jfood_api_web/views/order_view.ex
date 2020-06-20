@@ -14,7 +14,7 @@ defmodule JfoodApiWeb.OrderView do
     %{
       id: order.id,
       status: order.status,
-      total: order.total,
+      total: Decimal.to_float(order.total),
       user_id: order.user_id,
       products: render_many(order.products, OrderView, "product.json", as: :product),
     }
@@ -22,11 +22,9 @@ defmodule JfoodApiWeb.OrderView do
 
   def render("product.json", %{product: product}) do
     %{
-      product_id: product["product_id"],
-      name: product["name"],
-      quantity: product["quantity"],
-      price: (product["price"]),
-      total: product["total"],
+      id: product["item"]["id"],
+      name: product["item"]["name"],
+      price: product["item"]["price"],
     }
   end
 end

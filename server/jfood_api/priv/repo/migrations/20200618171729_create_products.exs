@@ -7,7 +7,7 @@ defmodule JfoodApi.Repo.Migrations.CreateProducts do
       add :quantity, :integer
       add :price, :decimal
       add :imageUrl, :string
-      add :description, :string
+      add :description, :text
 
       timestamps()
     end
