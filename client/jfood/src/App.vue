@@ -17,7 +17,14 @@
       </div>
 
       <v-spacer></v-spacer>
-
+      <v-badge
+        :content="count"
+        :value="count"
+        color="green"
+        overlap
+      >
+        <v-icon large>mdi-cart</v-icon>
+      </v-badge>
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
@@ -29,7 +36,7 @@
     </v-app-bar>
 
     <v-content>
-      <Home/>
+      <Home v-on:addCart="addCart"/>
     </v-content>
   </v-app>
 </template>
@@ -45,7 +52,13 @@ export default {
   },
 
   data: () => ({
-    //
+    count: 0,
+    show: false,
   }),
+  methods: {
+    addCart(value) {
+      this.count += value;
+    }
+  }
 };
 </script>
